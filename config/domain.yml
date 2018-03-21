@@ -1,0 +1,6 @@
+parameters:
+    domain:
+        dev:
+        uat:
+        uat-aws:
+        prod:

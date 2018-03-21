@@ -1,0 +1,7 @@
+.idea/*
+/var/cache/*
+/var/session/*
+/vendor
+/logs
+/config/environment.yml
+/config/database.yml

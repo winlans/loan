@@ -1,0 +1,9 @@
+test:
+    path: /test/test
+    defaults:  { _controller: Test\Controller\IndexController::Index }
+    methods: POST
+
+product_add:
+    path: /test/product/product-add
+    defaults: { _controller: Products\Controller\ProductsController::productAdd }
+    methods: POST

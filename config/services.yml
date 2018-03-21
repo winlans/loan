@@ -1,0 +1,17 @@
+# Learn more about services, parameters and containers at
+# @see http://symfony.com/doc/current/book/service_container.html
+services:
+    app.em_factory:
+        class: App\Service\EmFactory
+        arguments: ['%db_config%']
+
+    app.base_validator:
+        class: App\Service\BaseValidator
+        arguments: ['%domain%', '%environment%']
+
+    app.security:
+        class: App\Service\Security
+        arguments: ['@app.em_factory', '@symfony.http_foundation.request']
+
+    app.file:
+        class: App\Service\File

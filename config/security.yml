@@ -1,0 +1,6 @@
+parameters:
+    security:
+        unauthenticated_area:
+
+        unauthenticated_only:
+            - /

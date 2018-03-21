@@ -1,0 +1,5 @@
+imports:
+    - { resource: environment.yml }
+    - { resource: domain.yml }
+    - { resource: database.yml }
+    - { resource: security.yml }
