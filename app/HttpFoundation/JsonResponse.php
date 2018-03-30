@@ -20,6 +20,8 @@ class JsonResponse extends SymfonyJsonResponse
     const STATUS_LOGIN_REQUIRED = -10001;
     const STATUS_LOGOUT_REQUIRED = -10002;
 
+    const STATUS_ONLY_ADMIN_PERMISSION = 10004;
+
     public function __construct($status, $message = null, $data = null, $httpStatus = 200, $headers = array())
     {
         $reject = [

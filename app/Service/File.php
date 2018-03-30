@@ -19,6 +19,7 @@ class File
     const ALLOW_TYPE = array(
         'png', 'jpeg', 'jpg', 'gif', 'txt'
     );
+
     public function upload(\ArrayIterator $files){
         while ($files->valid()){
             /** @var UploadedFile $file */

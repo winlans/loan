@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="advertising")
  * @ORM\Entity
  */
-class Advertising
+class Advertising extends BaseEntity
 {
     /**
      * @var integer

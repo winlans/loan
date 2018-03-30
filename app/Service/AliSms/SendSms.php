@@ -1,5 +1,5 @@
 <?php
-namespace BI\Service\AliSms;
+namespace App\Service\AliSms;
 
 use Aliyun\Core\Config;
 use Aliyun\Core\Profile\DefaultProfile;

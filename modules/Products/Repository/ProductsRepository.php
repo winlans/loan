@@ -8,6 +8,7 @@
 namespace Products\Repository;
 use App\Entity\Products;
 use App\Repository\BaseRepository;
+use Doctrine\DBAL\Connection;
 
 class ProductsRepository extends BaseRepository
 {
@@ -82,4 +83,14 @@ class ProductsRepository extends BaseRepository
 
         return $statement->execute();
     }
+
+    public function paging($offset, $size, $status = 1)
+    {
+        $statement = $this->getEntityManager()->getConnection()->executeQuery('
+            SELECT * FROM products WHERE status = ? LIMIT ?, ?
+        ', array($status, $offset, $size), array(\PDO::PARAM_INT, \PDO::PARAM_INT, \PDO::PARAM_INT));
+
+        return $statement->fetchAll();
+    }
+
 }

@@ -5,7 +5,7 @@ namespace Users\Operator;
 use App\Entity\AuthCode;
 use App\Operator\BaseOperator;
 use App\Service\BaseValidator;
-use BI\Service\AliSms\SendSms;
+use App\Service\AliSms\SendSms;
 use User\Repository\AuthCodeRepository;
 use User\Repository\UsersRepository;
 

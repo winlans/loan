@@ -65,6 +65,18 @@ class ProductsController extends BaseController
         return new JsonResponse(JsonResponse::STATUS_SUCCESS, '', $op->listAll());
     }
 
+    public function pagingShow(Request $request)
+    {
+        $data = json_decode($request->get('data'), true) ?? [];
+        $op = new ProductsOperator();
+
+        $res = $op->pagingList($data);
+        if (false === $res)
+            return new JsonResponse(JsonResponse::STATUS_FAILED, $op->getErrorMsg(), '');
+
+        return new JsonResponse(JsonResponse::STATUS_SUCCESS, '', $res);
+    }
+
     public function productListForUser()
     {
         $op = new ProductsOperator();

@@ -60,11 +60,11 @@ class EntityManager extends DoctrineEntityManager{
         if(preg_match('/^([A-Z]\w*)(\\\Entity\\\|:)([A-Z]\w*)$/', $entityName, $matches)){
             $repositoryClass = $matches[1] . '\\Repository\\' . $matches[3] . 'Repository';
             if(class_exists($repositoryClass))
-                return new $repositoryClass($this, $this->getClassMetadata('DP\\Entity\\' . $matches[3]));
+                return new $repositoryClass($this, $this->getClassMetadata('App\\Entity\\' . $matches[3]));
 
-            $repositoryClass = 'DP\\Repository\\' . $matches[3] . 'Repository';
+            $repositoryClass = 'App\\Repository\\' . $matches[3] . 'Repository';
             if(class_exists($repositoryClass))
-                return new $repositoryClass($this, $this->getClassMetadata('DP\\Entity\\:' . $matches[3]));
+                return new $repositoryClass($this, $this->getClassMetadata('App\\Entity\\:' . $matches[3]));
         }
 
         return parent::getRepository($entityName);

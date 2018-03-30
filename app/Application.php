@@ -176,24 +176,19 @@ class Application extends \Silex\Application
         if (preg_match('/^\/test\/.+$/', $currentUri)) {
             return true;
         }
-        if($security->isLoggedIn()){
+        if ($security->isLoggedIn()) {
+            // 只有非登陆用户才能访问
             if(in_array($currentUri, $securityUrls['unauthenticated_only'])){
                 return new JsonResponse(JsonResponse::STATUS_LOGOUT_REQUIRED,
                     'The url you requested is restricted to unauthenticated user.');
             }
-        }elseif ( $userCode = $request->get('userCode')) {
-            // 由于这个后台暂时没有登陆逻辑， 所以根据userCode自动登陆
-            /** @var EmFactory $em */
-            $em = $container->get('app.em_factory');
-            /** @var UsersRepository $userInfoRep */
-            $userInfoRep = $em->getEntityManager()->getRepository('User:UserInfo');
-            if ( $userInfo = $userInfoRep->findOneBy(['userCode' => $userCode]) ) {
-                $security->login($userInfo);
-            }else{
-                return new JsonResponse(JsonResponse::STATUS_LOGIN_REQUIRED,
-                    'The url you requested is restricted to authenticated user.');
+            // 限定普通用户的访问区域
+            if ( !isset($request->getSession()->get('user')['is_admin']) &&
+                !in_array($currentUri, $securityUrls['ordinary_user']) ) {
+                return new JsonResponse(JsonResponse::STATUS_ONLY_ADMIN_PERMISSION, 'Only administrators can access it.', '');
             }
-        } elseif(!in_array($currentUri, $securityUrls['unauthenticated_area'])){
+            // 只有登陆入户才可访问的区域
+        } elseif (!in_array($currentUri, $securityUrls['unauthenticated_area'])) {
             return new JsonResponse(JsonResponse::STATUS_LOGIN_REQUIRED,
                 'The url you requested is restricted to authenticated user.');
         }

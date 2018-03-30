@@ -30,12 +30,16 @@ class Security
 
     /**
      * @param Users $user
+     * @param bool $is_admin
      * @return Users
      */
-    public function login($user)
+    public function login($user, $is_admin = false)
     {
         $user = clone $user;
         $userInfo = $user->toArray(false);
+
+        // 给管理员用户打上标记
+        $is_admin && $userInfo['is_admin'] = 1;
 
         $removed= [
             'password',
@@ -58,6 +62,10 @@ class Security
     public function isLoggedIn()
     {
         return (bool)$this->request->getSession()->get(self::KEY_SESSION_USER);
+    }
+
+    public function isAdmin(){
+        return (bool) $this->request->getSession()->get(self::KEY_SESSION_USER)['is_admin'];
     }
 
 

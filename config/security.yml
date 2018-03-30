@@ -1,6 +1,13 @@
 parameters:
     security:
         unauthenticated_area:
-
+            - /api/user/register-code
+            - /api/user/register
+            - /api/user/login
         unauthenticated_only:
-            - /
+            - /api/user/login
+            - /api/user/register
+        ordinary_user:
+            - /api/user/register
+
+

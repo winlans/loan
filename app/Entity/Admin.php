@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="admin")
  * @ORM\Entity
  */
-class Admin
+class Admin extends BaseEntity
 {
     /**
      * @var integer
@@ -41,6 +41,13 @@ class Admin
      * @ORM\Column(name="password", type="string", length=64, nullable=false)
      */
     private $password;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="status", type="boolean", nullable=false)
+     */
+    private $status;
 
     /**
      * @var \DateTime
@@ -134,6 +141,29 @@ class Admin
     public function getPassword()
     {
         return $this->password;
+    }
+
+    /**
+     * Set status
+     *
+     * @param boolean $status
+     * @return Admin
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return boolean
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 
     /**

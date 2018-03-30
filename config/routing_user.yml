@@ -1,0 +1,15 @@
+user_login:
+    path: /api/user/login
+    defaults: { _controller: User\Controller\UserController::loginAction}
+    methods: POST
+
+user_register_code:
+    path: /api/user/register-code
+    defaults: { _controller: User\Controller\UserController::getRegisterCode }
+    methods: POST
+
+user_register:
+    path: /api/user/register
+    defaults: { _controller: User\Controller\UserController::register }
+
+

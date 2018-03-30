@@ -1,0 +1,19 @@
+advert_add:
+    path: /api/advert/add
+    defaults: { _controller: Advert\Controller\AdvertController::add }
+    methods: POST
+
+advert_delete:
+    path: /api/advert/delete
+    defaults: { _controller: Advert\Controller\AdvertController::delete}
+    methods: POST
+
+advert_update:
+    path: /api/advert/update
+    defaults: { _controller: Advert\Controller\AdvertController::update }
+    methods: POST
+
+advert_paging:
+    path: /api/advert/paging
+    defaults: { _controller: Advert\Controller\AdvertController::pagingShow }
+    methods: POST

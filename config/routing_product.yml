@@ -1,0 +1,19 @@
+product_add:
+    path: /api/product/add
+    defaults: { _controller: Products\Controller\ProductsController::productAdd }
+    methods: POST
+
+product_modify:
+    path: /api/product/modify
+    defaults: { _controller: Products\Controller\ProductsController::productModify }
+    methods: POST
+
+product_del:
+    path: /api/product/delete
+    defaults: { _controller: Products\Controller\ProductsController::productDel }
+    methods: POST
+
+product_paging:
+    path: /api/product/paging
+    defaults: { _controller: Products\Controller\ProductsController::pagingShow }
+    methods: POST

@@ -9,6 +9,7 @@ namespace User\Repository;
 
 use App\Entity\Users;
 use App\Repository\BaseRepository;
+use App\Util\StringUtil;
 
 class UsersRepository extends BaseRepository{
     public function add($data){
@@ -24,5 +25,29 @@ class UsersRepository extends BaseRepository{
         $this->flush();
 
         return $user->getId();
+    }
+
+    public function fetchUserByMobileAndPassword($mobile, $password, $status = 1)
+    {
+        $filter = array(
+            'mobile' => $mobile,
+            'password' => StringUtil::encodePassword($password),
+            'status' => $status
+        );
+        return $this->findOneBy($filter);
+    }
+
+    /**
+     * @param $mobile
+     * @param int $status
+     * @return null| Users
+     */
+    public function fetchUserByMobile($mobile, $status = 1)
+    {
+        $filter = array(
+            'mobile' => $mobile,
+            'status' => $status
+        );
+        return $this->findOneBy($filter);
     }
 }

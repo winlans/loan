@@ -10,7 +10,9 @@ namespace User\Operator;
 use App\Entity\Users;
 use App\Operator\BaseOperator;
 use App\Service\BaseValidator;
+use App\Service\Security;
 use App\Util\StringUtil;
+use User\Repository\AdminRepository;
 use User\Repository\UsersRepository;
 use Users\Operator\AuthCodeOperator;
 
@@ -72,5 +74,35 @@ class UserOperator extends BaseOperator
             return $this->ensure(false, $authCode->getErrorCode(), $authCode->getEntityManager());
 
         return true;
+    }
+
+    public function login(array $data)
+    {
+        $this->verifyInputParams($data, ['username', 'password']);
+
+        /** @var UsersRepository $userRep */
+        $userRep = $this->getRepository('User:Users');
+        /** @var AdminRepository $adminRep */
+        $adminRep = $this->getRepository('User:Admin');
+
+        if ( $user = $userRep->fetchUserByMobile($data['username']) ) {
+            $is_admin = false;
+        } elseif ( $user = $adminRep->fetchAdminByMobile($data['username'])) {
+            $is_admin = true;
+        } else {
+            return $this->ensure($user, 0, 'Not found user by this mobile number.');
+        }
+
+        if ( !StringUtil::passwordVerify($data['password'], $user->getPassword()))
+            return $this->ensure(false, 21, 'input password is not correct.');
+
+        /** @var Security $security */
+        $security = $this->get('app.security');
+        $security->login($user, $is_admin);
+
+        return array(
+            'session_id' => $this->getSession()->getId(),
+            'user' => $this->getSession()->get(Security::KEY_SESSION_USER),
+        );
     }
 }

@@ -57,4 +57,18 @@ class ProductsOperator extends BaseOperator
 
         return $products;
     }
+
+    public function pagingList($data)
+    {
+        $this->verifyInputParams($data, ['page', 'size']);
+        if ($data['page'] < 1 || $data['size'] > 100)
+            return $this->ensure(false, 34, 'param error');
+
+        $offset = ($data['page'] - 1)* $data['size'];
+
+        /** @var ProductsRepository $rep */
+        $rep = $this->getRepository('Products:Products');
+
+        return $rep->paging($offset, $data['size']);
+    }
 }
