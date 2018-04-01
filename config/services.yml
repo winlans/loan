@@ -15,3 +15,7 @@ services:
 
     app.file:
         class: App\Service\File
+
+    app.redis_manager:
+        class: App\Service\RedisManager
+        arguments: ['%redis%']

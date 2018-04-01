@@ -186,6 +186,13 @@ abstract class BaseOperator{
         return true;
     }
 
+    protected function getUser($attr = ''){
+        if ($attr) {
+            return $this->getSession()->get(Security::KEY_SESSION_USER)[$attr];
+        }
+        return $this->getSession()->get(Security::KEY_SESSION_USER);
+    }
+
 
     /**
      * 由于当时间为 "0000-00-00 00:00:00" 时，strtotime 返回为负值，
