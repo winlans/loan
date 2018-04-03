@@ -17,3 +17,8 @@ product_paging:
     path: /api/product/paging
     defaults: { _controller: Products\Controller\ProductsController::pagingShow }
     methods: POST
+
+product_list_user:
+    path: /api/product/list
+    defaults: { _controller: Products\Controller\ProductsController::listForUser }
+    methods: POST

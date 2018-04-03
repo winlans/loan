@@ -77,11 +77,12 @@ class ProductsController extends BaseController
         return new JsonResponse(JsonResponse::STATUS_SUCCESS, '', $res);
     }
 
-    public function productListForUser()
+    public function listForUser(Request $request)
     {
+        $data = json_decode($request->get('data'), true) ?? [];
         $op = new ProductsOperator();
         $filter = ['status', 'not_show', 'loan_period_max'];
 
-        return new JsonResponse(JsonResponse::STATUS_SUCCESS, '', $op->listAll($filter));
+        return new JsonResponse(JsonResponse::STATUS_SUCCESS, '', $op->pagingList($data, $filter));
     }
 }

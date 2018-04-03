@@ -27,7 +27,7 @@ class ProductAnalyzerController extends BaseController
         return new JsonResponse(JsonResponse::STATUS_SUCCESS, 'OK');
     }
 
-    public function getStatistics(Request $request)
+    public function getProductStatistics(Request $request)
     {
         $data = json_decode($request->get('data'), true) ?? [];
 
@@ -35,5 +35,17 @@ class ProductAnalyzerController extends BaseController
         $res = $op->statisticsProduct($data);
 
         return new JsonResponse(JsonResponse::STATUS_SUCCESS, '', $res);
+    }
+
+    public function accessLogAction(Request $request)
+    {
+        $data = json_decode($request->get('data'), true) ?? [];
+
+        $op = new ProductAnalyzerOperator();
+        $res = $op->updateRecord($data);
+        if (false === $res)
+            return new JsonResponse(JsonResponse::STATUS_FAILED, $op->getErrorMsg());
+
+        return new JsonResponse(JsonResponse::STATUS_SUCCESS);
     }
 }

@@ -1,6 +1,6 @@
 test:
     path: /test/test
-    defaults:  { _controller: analyzer\controller\productanalyzercontroller::testRecord }
+    defaults:  { _controller: Analyzer\Controller\ProductAnalyzerController::testRecord }
     methods: POST
 
 product_add:
@@ -10,5 +10,5 @@ product_add:
 
 product_fafadel:
     path: /test/test2
-    defaults: { _controller: analyzer\controller\productanalyzercontroller::getStatistics}
+    defaults: { _controller: Analyzer\Controller\ProductAnalyzerController::getStatistics}
     methods: POST

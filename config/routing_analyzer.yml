@@ -1,0 +1,9 @@
+product_statistics:
+    path: /api/analyzer/product-statistics
+    defaults: { _controller: Analyzer\Controller\ProductAnalyzerController::getProductStatistics }
+    methods: POST
+
+product_access_log:
+    path: /api/analyzer/product-access
+    defaults: { _controller:  Analyzer\Controller\ProductAnalyzerController::accessLogAction }
+    methods: POST

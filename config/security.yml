@@ -9,5 +9,7 @@ parameters:
             - /api/user/register
         ordinary_user:
             - /api/user/register
+            - /api/product/list
+            - /api/analyzer/product-access
 
 
