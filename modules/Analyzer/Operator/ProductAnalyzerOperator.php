@@ -45,18 +45,20 @@ class ProductAnalyzerOperator extends BaseAnalyzerOperator
 
     public function statisticsProduct($data)
     {
-        $this->verifyInputParams($data, ['model', 'page', 'limit']);
+        $this->verifyInputParams($data, ['model', 'page']);
 
-        $data['page'] = $data['page'] >= 1 ? : 1;
-        $offset = ($data['page']  - 1) * $data['limit'];
+        $data['page'] = $data['page'] < 1 ? 1 : $data['page'];
+        $data['size'] = $data['size'] ?? 20;
+
+        $offset = ($data['page']  - 1) * $data['size'];
 
         /** @var AccessRecordRepository $rep */
         $rep = $this->getRepository('Analyzer:AccessRecord');
 
         if ($data['model'] == self::MODEL_BY_DAY_PRODUCT)
-            return $rep->fetchAccessByDayAndProduct($offset, $data['limit']);
+            return $rep->fetchAccessByDayAndProduct($offset, $data['size']);
 
-        return $rep->fetchAccessByDay($offset, $data['limit']);
+        return $rep->fetchAccessByDay($offset, $data['size']);
     }
 
     private function productExist($id)

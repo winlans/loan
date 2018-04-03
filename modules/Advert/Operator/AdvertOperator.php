@@ -13,6 +13,11 @@ use App\Operator\BaseOperator;
 
 class AdvertOperator extends BaseOperator
 {
+    /**
+     * 添加广告
+     * @param $data
+     * @return bool
+     */
     public function add($data)
     {
         $filter = ['is_show', 'sort', 'start', 'end', 'title', 'logo_path', 'skip_path'];
@@ -25,6 +30,11 @@ class AdvertOperator extends BaseOperator
         return true;
     }
 
+    /**
+     * 更新一则广告
+     * @param $data
+     * @return bool
+     */
     public function update($data)
     {
         $filter = ['id'];
@@ -38,6 +48,11 @@ class AdvertOperator extends BaseOperator
         return $adRep->update($data);
     }
 
+    /**
+     * 删除一则广告
+     * @param int $id
+     * @return bool
+     */
     public function delete(int $id)
     {
         if (!(int)$id)
@@ -51,12 +66,17 @@ class AdvertOperator extends BaseOperator
             return true;
     }
 
+    /**
+     * 分页展示广告
+     * @param array $data
+     * @return array|bool
+     */
     public function paging(array $data)
     {
-        $this->verifyInputParams($data, ['page', 'size']);
+        $this->verifyInputParams($data, ['page']);
 
-        if ($data['page'] < 1 || $data['size'] > 100)
-            return $this->ensure(false, 34, 'param error');
+        $data['page'] = $data['page'] < 1 ? 1 : $data['page'];
+        $data['size'] = $data['size'] ?? 20;
 
         $offset = ($data['page'] - 1) * $data['size'];
         /** @var AdvertisingRepository $adRep */
