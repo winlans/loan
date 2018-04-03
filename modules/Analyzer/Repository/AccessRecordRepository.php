@@ -89,6 +89,7 @@ class AccessRecordRepository extends BaseRepository
         $statement = $this->getEntityManager()->getConnection()->executeQuery('
          SELECT
             product_name,
+            product_id,
             SUM(d_count) deepth1_pv,
             SUM(a_count) deepth2_pv,
             SUM(CASE WHEN d_count <> 0 THEN 1 ELSE 0 END) deepth1_uv,

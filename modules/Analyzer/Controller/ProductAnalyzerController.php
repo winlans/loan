@@ -18,7 +18,9 @@ class ProductAnalyzerController extends BaseController
     /**
      *生成用于测试的访问记录
      */
-    public function testRecord(){
+    public function testRecord(Request $request){
+        if ($request->get('record') != 'true')
+            return new JsonResponse(JsonResponse::STATUS_FAILED);
         /** @var AccessRecordRepository $rep */
         set_time_limit(0);
         $rep = $this->getRepository('Analyzer:AccessRecord');
