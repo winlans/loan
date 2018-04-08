@@ -43,6 +43,8 @@ class AccessRecordRepository extends BaseRepository
                 $ob->setDCount($ob->getDCount()+1);
             } elseif ($data['deepth'] == 2) {
                 $ob->setACount($ob->getDCount()+1);
+            } else {
+                return ;
             }
             $this->persist($ob);
             $this->flush();
@@ -116,7 +118,7 @@ class AccessRecordRepository extends BaseRepository
             $pid = rand(0, 25);
             $d = rand(0, 50);
             $a = rand(0, $d);
-            $date = strtotime((new \DateTime())->setDate('2018', rand(5, 11), rand(0, 10))->format('Y-m-d'));
+            $date = (new \DateTime())->setDate('2018', rand(5, 11), rand(0, 10))->format('Y-m-d');
             $data = [
                 'p_id' => $pid,
                 'p_name' => range('a', 'z')[$pid],

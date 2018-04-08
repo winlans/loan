@@ -34,7 +34,7 @@ class ProductAnalyzerOperator extends BaseAnalyzerOperator
             return false;
 
         $data['user_id'] = $this->getUser('id');
-        $data['created'] = strtotime((new \DateTime())->format('Y-m-d'));
+        $data['created'] = (new \DateTime())->format('Y-m-d');
 
         /** @var AccessRecordRepository $rep */
         $rep = $this->getRepository('Analyzer:AccessRecord');
